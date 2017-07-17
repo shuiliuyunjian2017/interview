@@ -146,10 +146,26 @@
 
    1. 由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。
    2. 闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。
-   
+
+		
+		<ul id="aaa">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		var list = document.getElementById('aaa').getElementsByTagName('li');
+		for (var i = 0, len = list.length; i < len; i++) {
+			list[i].onclick = (function (n) {
+				return function () {
+					console.log(n);
+				};
+			})(i + 1);
+		}
+	   
 
 ### 8.有一个URL地址为：http://tao.com?a=1&c=2&d=3 ,请写一个方法，返回key-value键值对。 ###
-	[].split('&);
+	str.split('&');
 
 ### 9.什么叫JSONP？为什么说它不是真正的AJAX？ ###
 
@@ -171,11 +187,5 @@
    	Math.floor(Math.random()*(end-start+1) + count);
 
 	function compare(a, b){
-	   if(a < b){
-	     return -1;
-	   } else if(a > b){
-	      return 1;
-	   } else {
-	     return 0;
-	   }
+	   return a - b;
 	}
